@@ -24,14 +24,14 @@ func SingleHash(in, out chan interface{}) {
 	crc32ch := make(chan string, 100)
 
 	go func(inStrCh <-chan string) {
-		for {
-			select {
-			case <-cancelCh:
-				return
-			case dataCh <- val:
-				val++
-			}
-		}
+		// 	for {
+		// 		select {
+		// 		case <-cancelCh:
+		// 			return
+		// 		case dataCh <- val:
+		// 			val++
+		// 		}
+		// 	}
 		for inStr := range inStrCh {
 			md5 := DataSignerMd5(inStr)
 			fmt.Println("%1 SingleHash md5(data) %2", x, md5)
@@ -53,8 +53,8 @@ func SingleHash(in, out chan interface{}) {
 		}()
 	}
 
-	crcX := DataSignerCrc32(x)
-	fmt.Println("%1 SingleHash crc32(data) %2", x, crcX)
+	// crcX := DataSignerCrc32(x)
+	// fmt.Println("%1 SingleHash crc32(data) %2", x, crcX)
 }
 
 // MultiHash - считает значение crc32(th+data))
